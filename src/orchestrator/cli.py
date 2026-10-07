@@ -12,6 +12,8 @@ def main():
     parser.add_argument("--desde-archivo", action="store_true")
     parser.add_argument("--estado", action="store_true")
     parser.add_argument("--panel", action="store_true")
+    parser.add_argument("--dashboard", action="store_true")
+    parser.add_argument("--reporte", action="store_true")
     parser.add_argument("--listar-agentes", action="store_true")
     parser.add_argument("--aprobar", type=str)
     parser.add_argument("--rechazar", type=str)
@@ -35,6 +37,20 @@ def main():
 
     if args.panel:
         print(orch.panel())
+        return
+
+    if args.dashboard:
+        from src.orchestrator.dashboard import Dashboard
+        Dashboard(orch).mostrar()
+        return
+
+    if args.reporte:
+        from src.orchestrator.reports import Reports
+        r = Reports(orch)
+        d = r.generar_todos()
+        print(f"Reportes generados en: {d}")
+        for f in sorted(d.iterdir()):
+            print(f"  - {f.name}")
         return
 
     if args.objetivo:

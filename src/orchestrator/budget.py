@@ -25,4 +25,10 @@ class Budget:
         return self.costos[tarea_id] <= self.max_costo
 
     def estado(self, tarea_id):
-        return {"tarea": tarea_id, "intentos": self.intentos.get(tarea_id, 0), "max_intentos": self.max_intentos}
+        return {
+            "tarea": tarea_id,
+            "intentos": self.intentos.get(tarea_id, 0),
+            "max_intentos": self.max_intentos,
+            "costo": self.costos.get(tarea_id, 0),
+            "max_costo": self.max_costo,
+        }
