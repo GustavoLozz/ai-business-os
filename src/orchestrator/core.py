@@ -17,12 +17,27 @@ class Orchestrator:
         self.registry = AgentRegistry()
         self.tasks = TaskManager()
         self.approvals = Approvals()
+        self._runner = None
         self.logger.info("Orchestrator inicializado", agentes=self.registry.contar())
+
+    @property
+    def runner(self):
+        """Lazy loading del AgentRunner (evita import circular)."""
+        if self._runner is None:
+            from .agent_runner import AgentRunner
+            self._runner = AgentRunner(self)
+        return self._runner
 
     def recibir_objetivo(self, objetivo):
         self.logger.info("Objetivo recibido", objetivo=objetivo)
         self.memory.recordar("objetivo", objetivo)
         return self.tasks.crear(objetivo, agente="Director", prioridad="alta")
+
+    def ejecutar_flujo(self, objetivo):
+        """Ejecuta el flujo completo de agentes."""
+        self.logger.info("Flujo solicitado", objetivo=objetivo)
+        self.memory.recordar("objetivo_flujo", objetivo)
+        return self.runner.ejecutar_flujo(objetivo)
 
     def estado(self):
         return {

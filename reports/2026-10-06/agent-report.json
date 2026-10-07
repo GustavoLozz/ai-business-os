@@ -6,43 +6,43 @@
       "nombre": "Director",
       "rol": "Planifica y prioriza objetivos",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158364"
+      "registrado_en": "2026-10-06T23:32:14.215350"
     },
     {
       "nombre": "Arquitecto",
       "rol": "Disena estructura y arquitectura",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158459"
+      "registrado_en": "2026-10-06T23:32:14.215381"
     },
     {
       "nombre": "Developer",
       "rol": "Escribe y modifica codigo",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158475"
+      "registrado_en": "2026-10-06T23:32:14.215396"
     },
     {
       "nombre": "Quantum_RD",
       "rol": "Experimenta con quantum-inspired",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158488"
+      "registrado_en": "2026-10-06T23:32:14.215409"
     },
     {
       "nombre": "Tester",
       "rol": "Crea y corre tests",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158501"
+      "registrado_en": "2026-10-06T23:32:14.215423"
     },
     {
       "nombre": "Auditor",
       "rol": "Revisa, audita y bloquea si es necesario",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158514"
+      "registrado_en": "2026-10-06T23:32:14.215436"
     },
     {
       "nombre": "Business",
       "rol": "Simula y analiza negocios",
       "estado": "registrado",
-      "registrado_en": "2026-10-06T22:05:42.158528"
+      "registrado_en": "2026-10-06T23:32:14.215450"
     }
   ]
 }
