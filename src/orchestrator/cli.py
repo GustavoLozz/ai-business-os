@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def _imprimir_flujo(flujo):
-    """Imprime el resultado del flujo de forma legible."""
     print("=" * 60)
     print(f"  FLUJO: {flujo.get('objetivo', '')[:50]}")
     print("=" * 60)
@@ -47,6 +46,35 @@ def _imprimir_flujo(flujo):
     print("=" * 60)
 
 
+def _imprimir_simulacion(flujo):
+    print("=" * 60)
+    print("  SIMULACION DE EMPRESA VIRTUAL")
+    print("=" * 60)
+    print(f"  Estado: {flujo.get('estado', '?')}")
+    print(f"  Agentes ejecutados: {len(flujo.get('pasos', []))}")
+    print("-" * 60)
+
+    sim = flujo.get("simulacion", {})
+    if "error" in sim:
+        print(f"  ERROR en simulacion: {sim['error']}")
+        return
+
+    params = flujo.get("parametros", {})
+    print(f"  Parametros: {params.get('dias', '?')} dias, "
+          f"{params.get('clientes', '?')} clientes, "
+          f"{params.get('productos', '?')} productos")
+    print()
+    print("  RESULTADO ECONOMICO:")
+    print(f"    Facturacion:      ${sim.get('facturacion', 0):,.0f}")
+    print(f"    Costos:           ${sim.get('costos', 0):,.0f}")
+    print(f"    Margen:           ${sim.get('margen', 0):,.0f}")
+    print(f"    Margen %:         {sim.get('margen_pct', 0):.1f}%")
+    print(f"    Clientes activos: {sim.get('clientes_activos', 0)}/{sim.get('clientes_totales', 0)}")
+    print(f"    Ventas totales:   {sim.get('ventas_totales', 0)}")
+    print(f"    Motor quantum:    {sim.get('motor_quantum', '?')}")
+    print("=" * 60)
+
+
 def main():
     parser = argparse.ArgumentParser(description="AI-BUSINESS-OS - Orchestrator CLI")
     parser.add_argument("--objetivo", type=str)
@@ -56,7 +84,16 @@ def main():
     parser.add_argument("--dashboard", action="store_true")
     parser.add_argument("--reporte", action="store_true")
     parser.add_argument("--listar-agentes", action="store_true")
-    parser.add_argument("--flujo", type=str, help="Ejecuta el flujo completo de agentes")
+    parser.add_argument("--flujo", type=str)
+    parser.add_argument("--simular-empresa", action="store_true")
+    parser.add_argument("--dias", type=int, default=30)
+    parser.add_argument("--clientes", type=int, default=100)
+    parser.add_argument("--diagrama", action="store_true",
+                        help="Exporta el ultimo flujo/simulacion a .dot")
+    parser.add_argument("--diagrama-sistema", action="store_true",
+                        help="Exporta el estado del sistema a .dot")
+    parser.add_argument("--config", action="store_true",
+                        help="Muestra la configuracion actual")
     parser.add_argument("--aprobar", type=str)
     parser.add_argument("--rechazar", type=str)
 
@@ -65,6 +102,11 @@ def main():
     sys.path.insert(0, str(ROOT))
     from src.orchestrator.core import Orchestrator
     orch = Orchestrator()
+
+    if args.config:
+        from src.orchestrator.config import Config
+        print(json.dumps(Config.reportar(), indent=2, ensure_ascii=False))
+        return
 
     if args.listar_agentes:
         print("Agentes registrados:")
@@ -94,9 +136,36 @@ def main():
             print(f"  - {f.name}")
         return
 
+    if args.diagrama_sistema:
+        from src.orchestrator.dot_exporter import DotExporter
+        exp = DotExporter()
+        r = exp.exportar_sistema(orch)
+        print(f"Diagrama del sistema exportado: {r['archivo']}")
+        return
+
+    if args.simular_empresa:
+        flujo = orch.simular_empresa(
+            dias=args.dias,
+            clientes=args.clientes,
+        )
+        _imprimir_simulacion(flujo)
+
+        if args.diagrama:
+            from src.orchestrator.dot_exporter import DotExporter
+            exp = DotExporter()
+            r = exp.exportar_flujo(flujo, nombre="simulacion_empresa")
+            print(f"\nDiagrama .dot exportado: {r['archivo']}")
+        return
+
     if args.flujo:
         flujo = orch.ejecutar_flujo(args.flujo)
         _imprimir_flujo(flujo)
+
+        if args.diagrama:
+            from src.orchestrator.dot_exporter import DotExporter
+            exp = DotExporter()
+            r = exp.exportar_flujo(flujo)
+            print(f"\nDiagrama .dot exportado: {r['archivo']}")
         return
 
     if args.objetivo:
