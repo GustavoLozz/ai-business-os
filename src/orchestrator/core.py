@@ -18,6 +18,7 @@ class Orchestrator:
         self.tasks = TaskManager()
         self.approvals = Approvals()
         self._runner = None
+        self._simulator_runner = None
         self.logger.info("Orchestrator inicializado", agentes=self.registry.contar())
 
     @property
@@ -28,16 +29,32 @@ class Orchestrator:
             self._runner = AgentRunner(self)
         return self._runner
 
+    @property
+    def simulator(self):
+        """Lazy loading del SimulatorRunner."""
+        if self._simulator_runner is None:
+            from .simulator_runner import SimulatorRunner
+            self._simulator_runner = SimulatorRunner(self)
+        return self._simulator_runner
+
     def recibir_objetivo(self, objetivo):
         self.logger.info("Objetivo recibido", objetivo=objetivo)
         self.memory.recordar("objetivo", objetivo)
         return self.tasks.crear(objetivo, agente="Director", prioridad="alta")
 
     def ejecutar_flujo(self, objetivo):
-        """Ejecuta el flujo completo de agentes."""
+        """Ejecuta el flujo completo de agentes (sin simulador)."""
         self.logger.info("Flujo solicitado", objetivo=objetivo)
         self.memory.recordar("objetivo_flujo", objetivo)
         return self.runner.ejecutar_flujo(objetivo)
+
+    def simular_empresa(self, dias=30, clientes=100, productos=5, seed=42):
+        """Ejecuta el flujo de simulacion completo con agentes + simulador."""
+        self.logger.info("Simulacion solicitada", dias=dias, clientes=clientes)
+        self.memory.recordar("objetivo_simulacion",
+                             f"simular {dias} dias con {clientes} clientes")
+        return self.simulator.ejecutar(dias=dias, clientes=clientes,
+                                       productos=productos, seed=seed)
 
     def estado(self):
         return {

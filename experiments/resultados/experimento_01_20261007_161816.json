@@ -1,0 +1,45 @@
+{
+  "experimento": "01",
+  "fecha": "20261007_161816",
+  "parametros": {
+    "dias": 5,
+    "clientes": 20,
+    "productos": 3,
+    "seed": 99
+  },
+  "resultados": {
+    "clasico": {
+      "nombre": "Clasico",
+      "facturacion": 27869,
+      "costos": 252500,
+      "margen": -224631,
+      "margen_pct": -806.02,
+      "clientes_activos": 19,
+      "ventas": 40,
+      "mejora_pct": 0.0
+    },
+    "quantum_inspired": {
+      "nombre": "Quantum-Inspired",
+      "facturacion": 46215,
+      "costos": 252500,
+      "margen": -206285,
+      "margen_pct": -446.36,
+      "clientes_activos": 19,
+      "ventas": 56,
+      "mejora_pct": 8.17
+    },
+    "cuantico": {
+      "nombre": "Cuantico (Qiskit)",
+      "facturacion": 67931,
+      "costos": 252500,
+      "margen": -184569,
+      "margen_pct": -271.7,
+      "clientes_activos": 20,
+      "ventas": 46,
+      "motor_quantum": "qiskit_aer",
+      "iteraciones_annealing": 20,
+      "mejora_pct": 17.83
+    }
+  },
+  "recomendacion": "Cuantico (Qiskit)"
+}
