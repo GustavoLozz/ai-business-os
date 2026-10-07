@@ -1,0 +1,24 @@
+digraph sistema {
+  rankdir=TB;
+  node [shape=box, style="rounded,filled", fontname="Arial"];
+
+  label="AI-BUSINESS-OS - Estado del Sistema";
+  labelloc=t;
+
+  ORQ [label="ORCHESTRATOR\nAgentes: 7\nTareas: 0\nMemorias: 37", fillcolor="#4FC3F7"];
+
+  A0 [label="Director\nPlanifica y prioriza objetivos", fillcolor="#FFF9C4"];
+  ORQ -> A0;
+  A1 [label="Arquitecto\nDisena estructura y arquitectu", fillcolor="#FFF9C4"];
+  ORQ -> A1;
+  A2 [label="Developer\nEscribe y modifica codigo", fillcolor="#FFF9C4"];
+  ORQ -> A2;
+  A3 [label="Quantum_RD\nExperimenta con quantum-inspir", fillcolor="#FFF9C4"];
+  ORQ -> A3;
+  A4 [label="Tester\nCrea y corre tests", fillcolor="#FFF9C4"];
+  ORQ -> A4;
+  A5 [label="Auditor\nRevisa, audita y bloquea si es", fillcolor="#FFF9C4"];
+  ORQ -> A5;
+  A6 [label="Business\nSimula y analiza negocios", fillcolor="#FFF9C4"];
+  ORQ -> A6;
+}

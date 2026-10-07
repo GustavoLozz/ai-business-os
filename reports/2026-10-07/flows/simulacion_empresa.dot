@@ -1,0 +1,26 @@
+digraph flujo {
+  rankdir=TB;
+  node [shape=box, style="rounded,filled", fontname="Arial"];
+  edge [fontname="Arial", fontsize=10];
+
+  label="Flujo: Simular empresa virtual 30 dias con 100 clientes\nEstado: completado";
+  labelloc=t;
+
+  INICIO [label="INICIO\nSimular empresa virtual 30 dias con 100 ", fillcolor="#C8E6C9"];
+  N0 [label="Director\n5 subtareas", fillcolor="#BBDEFB"];
+  N1 [label="Arquitecto\n5 componentes", fillcolor="#D1C4E9"];
+  N2 [label="Developer\n1 archivos", fillcolor="#C8E6C9"];
+  N3 [label="Quantum_RD\nQuantum-Inspired Sim", fillcolor="#B2EBF2"];
+  N4 [label="Tester\n7 pass / 0 fail", fillcolor="#FFE0B2"];
+  N5 [label="Auditor\nAPROBADO", fillcolor="#FFCDD2"];
+  N6 [label="Business\nviabilidad: alta", fillcolor="#F8BBD0"];
+  FIN [label="COMPLETADO", fillcolor="#66BB6A"];
+  INICIO -> N0;
+  N0 -> N1;
+  N1 -> N2;
+  N2 -> N3;
+  N3 -> N4;
+  N4 -> N5;
+  N5 -> N6;
+  N6 -> FIN;
+}
