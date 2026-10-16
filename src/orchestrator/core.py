@@ -9,7 +9,13 @@ from .approvals import Approvals
 
 
 class Orchestrator:
-    def __init__(self):
+    def __init__(self, brain=None, brain_tipo=None):
+        """Crea el Orchestrator.
+
+        Args:
+            brain: instancia de Brain (opcional). Si es None, auto-detecta.
+            brain_tipo: "openrouter" | "null" | None. Fuerza un tipo especifico.
+        """
         self.logger = Logger()
         self.memory = Memory()
         self.budget = Budget()
@@ -17,16 +23,26 @@ class Orchestrator:
         self.registry = AgentRegistry()
         self.tasks = TaskManager()
         self.approvals = Approvals()
+        self._brain = brain
+        self._brain_tipo = brain_tipo
         self._runner = None
         self._simulator_runner = None
         self.logger.info("Orchestrator inicializado", agentes=self.registry.contar())
 
     @property
+    def brain(self):
+        """Lazy loading del cerebro."""
+        if self._brain is None:
+            from .brains import crear_brain
+            self._brain = crear_brain(self._brain_tipo)
+        return self._brain
+
+    @property
     def runner(self):
-        """Lazy loading del AgentRunner (evita import circular)."""
+        """Lazy loading del AgentRunner."""
         if self._runner is None:
             from .agent_runner import AgentRunner
-            self._runner = AgentRunner(self)
+            self._runner = AgentRunner(self, brain=self.brain)
         return self._runner
 
     @property
