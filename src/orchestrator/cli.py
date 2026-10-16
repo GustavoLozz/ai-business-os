@@ -75,6 +75,32 @@ def _imprimir_simulacion(flujo):
     print("=" * 60)
 
 
+def _imprimir_informe(informe):
+    print("=" * 60)
+    print("  INFORME EJECUTIVO")
+    print("=" * 60)
+    sis = informe["sistema"]
+    print(f"  Fecha: {informe['fecha']}")
+    print(f"  Agentes: {sis['agentes_registrados']} | "
+          f"Tareas: {sis['tareas_totales']} | "
+          f"Memorias: {sis['memorias_guardadas']}")
+    print("-" * 60)
+    sim = informe["ultima_simulacion"]
+    if sim["disponible"]:
+        print(f"  Ultima simulacion: {sim['descripcion'][:50]}")
+        print(f"    Facturacion: ${sim['facturacion']:,.0f}")
+        print(f"    Margen:      ${sim['margen']:,.0f} ({sim['margen_pct']:.1f}%)")
+    else:
+        print(f"  {sim['mensaje']}")
+    print("-" * 60)
+    print("  RECOMENDACIONES:")
+    for r in informe["recomendaciones"]:
+        print(f"    - {r}")
+    print("=" * 60)
+    print(f"  Guardado en: reports/{informe['fecha']}/informe-ejecutivo.md")
+    print("=" * 60)
+
+
 def main():
     parser = argparse.ArgumentParser(description="AI-BUSINESS-OS - Orchestrator CLI")
     parser.add_argument("--objetivo", type=str)
@@ -83,17 +109,16 @@ def main():
     parser.add_argument("--panel", action="store_true")
     parser.add_argument("--dashboard", action="store_true")
     parser.add_argument("--reporte", action="store_true")
+    parser.add_argument("--informe-ejecutivo", action="store_true",
+                        help="Genera el informe ejecutivo del CEO")
     parser.add_argument("--listar-agentes", action="store_true")
     parser.add_argument("--flujo", type=str)
     parser.add_argument("--simular-empresa", action="store_true")
     parser.add_argument("--dias", type=int, default=30)
     parser.add_argument("--clientes", type=int, default=100)
-    parser.add_argument("--diagrama", action="store_true",
-                        help="Exporta el ultimo flujo/simulacion a .dot")
-    parser.add_argument("--diagrama-sistema", action="store_true",
-                        help="Exporta el estado del sistema a .dot")
-    parser.add_argument("--config", action="store_true",
-                        help="Muestra la configuracion actual")
+    parser.add_argument("--diagrama", action="store_true")
+    parser.add_argument("--diagrama-sistema", action="store_true")
+    parser.add_argument("--config", action="store_true")
     parser.add_argument("--aprobar", type=str)
     parser.add_argument("--rechazar", type=str)
 
@@ -134,6 +159,12 @@ def main():
         print(f"Reportes generados en: {d}")
         for f in sorted(d.iterdir()):
             print(f"  - {f.name}")
+        return
+
+    if args.informe_ejecutivo:
+        from src.orchestrator.executive_report import ExecutiveReport
+        informe = ExecutiveReport(orch).generar()
+        _imprimir_informe(informe)
         return
 
     if args.diagrama_sistema:

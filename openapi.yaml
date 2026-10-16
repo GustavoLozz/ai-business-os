@@ -1,0 +1,334 @@
+openapi: 3.0.3
+info:
+  title: AI-BUSINESS-OS API
+  description: |
+    API de ejecucion gobernada para agentes de IA.
+
+    AI-BUSINESS-OS es un sistema operativo empresarial autonomo con 7 agentes
+    especializados, gobernanza estricta, auditoria automatica y aprobaciones
+    humanas. Diseñado para que otras IA deleguen ejecucion segura.
+
+    **Estado actual:** Especificacion conceptual (Etapa 6). La API REST real
+    se implementa en Etapa 7.
+  version: 0.6.0
+  contact:
+    name: Gustavo
+    url: https://github.com/gustavo/ai-business-os
+  license:
+    name: Open Source
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Servidor local (a implementar en Etapa 7)
+
+tags:
+  - name: system
+    description: Estado y salud del sistema
+  - name: agents
+    description: Los 7 agentes especializados
+  - name: tasks
+    description: Gestion de tareas
+  - name: simulations
+    description: Simulador empresarial y experimentos
+  - name: approvals
+    description: Aprobaciones humanas
+
+paths:
+  /system/status:
+    get:
+      tags: [system]
+      summary: Estado general del sistema
+      description: Devuelve el estado actual de AI-BUSINESS-OS
+      responses:
+        "200":
+          description: Estado del sistema
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemStatus"
+
+  /system/config:
+    get:
+      tags: [system]
+      summary: Configuracion actual
+      responses:
+        "200":
+          description: Configuracion cargada desde .env
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /agents:
+    get:
+      tags: [agents]
+      summary: Listar los 7 agentes
+      responses:
+        "200":
+          description: Lista de agentes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Agent"
+
+  /agents/{nombre}/run:
+    post:
+      tags: [agents]
+      summary: Ejecutar un agente con una tarea
+      parameters:
+        - name: nombre
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [Director, Arquitecto, Developer, Quantum_RD, Tester, Auditor, Business]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskRequest"
+      responses:
+        "200":
+          description: Resultado de la ejecucion
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /tasks:
+    get:
+      tags: [tasks]
+      summary: Listar tareas
+      responses:
+        "200":
+          description: Lista de tareas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+
+    post:
+      tags: [tasks]
+      summary: Crear una tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskRequest"
+      responses:
+        "201":
+          description: Tarea creada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+
+  /simulations/run:
+    post:
+      tags: [simulations]
+      summary: Correr simulacion empresarial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dias:
+                  type: integer
+                  default: 30
+                clientes:
+                  type: integer
+                  default: 100
+                productos:
+                  type: integer
+                  default: 5
+                seed:
+                  type: integer
+                  default: 42
+      responses:
+        "200":
+          description: Resultado de la simulacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationResult"
+
+  /simulations/compare:
+    post:
+      tags: [simulations]
+      summary: Comparar estrategias (clasico vs quantum-inspired vs cuantico)
+      responses:
+        "200":
+          description: Comparativa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScenarioResult"
+
+  /approvals/pending:
+    get:
+      tags: [approvals]
+      summary: Listar aprobaciones pendientes
+      responses:
+        "200":
+          description: Lista de aprobaciones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Approval"
+
+  /approvals/{task_id}/approve:
+    post:
+      tags: [approvals]
+      summary: Aprobar una tarea pendiente
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Aprobacion registrada
+
+  /approvals/{task_id}/reject:
+    post:
+      tags: [approvals]
+      summary: Rechazar una tarea pendiente
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Rechazo registrado
+
+components:
+  schemas:
+    SystemStatus:
+      type: object
+      properties:
+        agentes_registrados:
+          type: integer
+        tareas_totales:
+          type: integer
+        memorias_guardadas:
+          type: integer
+        pendientes_aprobacion:
+          type: integer
+        estado_general:
+          type: string
+          enum: [OK, DEGRADED, ERROR]
+
+    Agent:
+      type: object
+      properties:
+        nombre:
+          type: string
+        rol:
+          type: string
+        estado:
+          type: string
+          enum: [registrado, activo, inactivo]
+        permisos:
+          type: array
+          items:
+            type: string
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        descripcion:
+          type: string
+        agente:
+          type: string
+        estado:
+          type: string
+        intentos:
+          type: integer
+        creada:
+          type: string
+          format: date-time
+
+    TaskRequest:
+      type: object
+      required: [descripcion]
+      properties:
+        descripcion:
+          type: string
+        agente:
+          type: string
+        accion:
+          type: string
+        prioridad:
+          type: string
+          enum: [alta, media, baja]
+
+    SimulationResult:
+      type: object
+      properties:
+        facturacion:
+          type: number
+        costos:
+          type: number
+        margen:
+          type: number
+        margen_pct:
+          type: number
+        clientes_activos:
+          type: integer
+        clientes_totales:
+          type: integer
+        ventas_totales:
+          type: integer
+        motor_quantum:
+          type: string
+
+    ScenarioResult:
+      type: object
+      properties:
+        nombre:
+          type: string
+        margen:
+          type: number
+        mejora_pct:
+          type: number
+
+    Approval:
+      type: object
+      properties:
+        task_id:
+          type: string
+        motivo:
+          type: string
+        fecha:
+          type: string
+          format: date-time
+        estado:
+          type: string
+          enum: [pendiente, aprobada, rechazada]
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+security:
+  - ApiKeyAuth: []
