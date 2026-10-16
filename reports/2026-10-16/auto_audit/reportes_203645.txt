@@ -1,0 +1,11 @@
+﻿Reportes generados en: C:\Users\RCA\Desktop\AI-BUSINESS-OS\reports\2026-10-16
+  - agent-report.json
+  - auto_audit
+  - business-report.json
+  - daily-report.md
+  - errors.json
+  - flows
+  - informe-ejecutivo.json
+  - informe-ejecutivo.md
+  - security-report.json
+
