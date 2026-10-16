@@ -1,12 +1,23 @@
 {
   "fecha": "2026-10-16",
-  "timestamp": "2026-10-16T08:53:14.861561",
+  "timestamp": "2026-10-16T10:39:12.535915",
   "sistema": {
     "agentes_registrados": 7,
     "tareas_totales": 0,
-    "memorias_guardadas": 17,
+    "memorias_guardadas": 28,
     "pendientes_aprobacion": 0,
     "estado_general": "OK"
+  },
+  "cerebro": {
+    "nombre": "OpenRouterBrain",
+    "modelo": "deepseek/deepseek-v4-flash-0731",
+    "tipo": "openrouter",
+    "disponible": true,
+    "llamadas": 0,
+    "errores": 0,
+    "tokens_entrada": 0,
+    "tokens_salida": 0,
+    "costo_estimado_usd": 0.0
   },
   "agentes": [
     {
@@ -53,24 +64,22 @@
     }
   ],
   "ultima_simulacion": {
-    "disponible": false,
-    "mensaje": "Aun no se ejecuto ninguna simulacion completa.",
-    "descripcion": "",
-    "facturacion": 0,
-    "margen": 0,
-    "margen_pct": 0,
-    "fecha": "?"
+    "disponible": true,
+    "descripcion": "Simular empresa virtual 5 dias con 20 clientes",
+    "facturacion": 67931.0,
+    "margen": -184569.0,
+    "margen_pct": -271.7,
+    "fecha": "2026-10-16T10:23:05.652098"
   },
   "recomendaciones": [
-    "Correr una simulacion completa para obtener recomendaciones especificas.",
-    "Revisar MEJORAS_PENDIENTES.md para el backlog.",
-    "Considerar Etapa 7 (conectores reales) cuando este listo."
+    "Margen negativo. La empresa pierde dinero. Revisar urgente.",
+    "Revisar MEJORAS_PENDIENTES.md para el backlog."
   ],
   "proximos_pasos": [
     {
-      "etapa": 6,
-      "nombre": "Informe ejecutivo + OpenAPI",
-      "estado": "en_curso"
+      "etapa": 9,
+      "nombre": "Cerebros LLM (OpenRouter + DeepSeek)",
+      "estado": "completado"
     },
     {
       "etapa": 7,
@@ -80,11 +89,6 @@
     {
       "etapa": 8,
       "nombre": "Publicacion B2AI (GitHub + HuggingFace)",
-      "estado": "pendiente"
-    },
-    {
-      "etapa": 9,
-      "nombre": "Cerebros LLM (Ollama/OpenAI)",
       "estado": "pendiente"
     }
   ]
