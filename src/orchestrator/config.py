@@ -1,8 +1,7 @@
 """Configuracion central del sistema.
 
 SEGURIDAD: lee UNICAMENTE desde el .env del proyecto.
-Ignora las variables de entorno globales de Windows para evitar
-que otras API keys ajenas al proyecto se filtren por accidente.
+Ignora las variables de entorno globales de Windows.
 """
 from pathlib import Path
 
@@ -15,7 +14,6 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[2]
 ENV_FILE = ROOT / ".env"
 
-# Leer SOLO del .env local (no del entorno global)
 if _DOTENV_DISPONIBLE and ENV_FILE.exists():
     _ENV = dotenv_values(ENV_FILE)
 else:
@@ -51,13 +49,22 @@ def _get_bool(key, default=False):
 class Config:
     """Configuracion del sistema. Solo lee del .env del proyecto."""
 
-    # LLM / Cerebros
+    # LLM / Cerebros locales
     OLLAMA_HOST = _get_str("OLLAMA_HOST", "")
     OLLAMA_MODEL = _get_str("OLLAMA_MODEL", "")
+
+    # OpenAI
     OPENAI_API_KEY = _get_str("OPENAI_API_KEY", "")
     OPENAI_MODEL = _get_str("OPENAI_MODEL", "gpt-4o-mini")
+
+    # Anthropic
     ANTHROPIC_API_KEY = _get_str("ANTHROPIC_API_KEY", "")
     ANTHROPIC_MODEL = _get_str("ANTHROPIC_MODEL", "claude-3-5-sonnet-latest")
+
+    # OpenRouter (cerebro principal)
+    OPENROUTER_API_KEY = _get_str("OPENROUTER_API_KEY", "")
+    OPENROUTER_MODEL = _get_str("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash-0731")
+    OPENROUTER_MAX_TOKENS = _get_int("OPENROUTER_MAX_TOKENS", 1000)
 
     # Rutas
     AI_BUSINESS_OS_ROOT = Path(_get_str("AI_BUSINESS_OS_ROOT", str(ROOT)))
@@ -88,7 +95,17 @@ class Config:
             "dotenv_disponible": _DOTENV_DISPONIBLE,
             "env_file_existe": ENV_FILE.exists(),
             "solo_lee_del_env_local": True,
-            "llm_configurado": bool(cls.OLLAMA_HOST or cls.OPENAI_API_KEY or cls.ANTHROPIC_API_KEY),
+            "llm_configurado": bool(
+                cls.OLLAMA_HOST or cls.OPENAI_API_KEY or
+                cls.ANTHROPIC_API_KEY or cls.OPENROUTER_API_KEY
+            ),
+            "cerebros_disponibles": {
+                "ollama": bool(cls.OLLAMA_HOST),
+                "openai": bool(cls.OPENAI_API_KEY),
+                "anthropic": bool(cls.ANTHROPIC_API_KEY),
+                "openrouter": bool(cls.OPENROUTER_API_KEY),
+            },
+            "modelo_principal": cls.OPENROUTER_MODEL if cls.OPENROUTER_API_KEY else "simbolico",
             "max_intentos": cls.MAX_INTENTOS_POR_TAREA,
             "log_level": cls.LOG_LEVEL,
             "simulador_defaults": {

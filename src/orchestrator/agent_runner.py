@@ -1,14 +1,19 @@
 """AgentRunner. Ejecuta agentes aplicando permisos, presupuesto y aprobaciones."""
 from src.agents import crear_todos
+from .brains import crear_brain
 
 
 class AgentRunner:
     """Ejecuta agentes siguiendo las reglas de GOVERNANCE."""
 
-    def __init__(self, orchestrator):
+    def __init__(self, orchestrator, brain=None):
         self.orch = orchestrator
-        self.agentes = crear_todos(cerebro=None)
+        self.brain = brain if brain is not None else crear_brain()
+        self.agentes = crear_todos(cerebro=self.brain)
         self.resultados = []
+        self.orch.logger.info("runner_iniciado",
+                              cerebro=self.brain.info().get("nombre", "?"),
+                              modelo=self.brain.info().get("modelo", "?"))
 
     def ejecutar_agente(self, nombre_agente, tarea):
         """Ejecuta un agente verificando permisos, presupuesto y aprobaciones."""
@@ -48,22 +53,24 @@ class AgentRunner:
         self.orch.logger.info("runner_fin", agente=nombre_agente)
         return resultado
 
+    def estado_cerebro(self):
+        """Devuelve info del cerebro actual."""
+        return self.brain.info()
+
     def ejecutar_flujo(self, objetivo):
         """Ejecuta el flujo completo: Director -> Arquitecto -> Developer
         -> Quantum -> Tester -> Auditor -> Business."""
         self.orch.logger.info("flujo_inicio", objetivo=objetivo)
-        flujo = {"objetivo": objetivo, "pasos": []}
+        flujo = {"objetivo": objetivo, "pasos": [],
+                 "cerebro": self.brain.info().get("nombre", "?")}
 
-        # 1. Director descompone
         r_director = self.ejecutar_agente("Director", {"descripcion": objetivo})
         flujo["pasos"].append({"agente": "Director", "resultado": r_director})
         subtareas = r_director.get("subtareas", [])
 
-        # 2. Arquitecto propone estructura del objetivo global
         r_arq = self.ejecutar_agente("Arquitecto", {"descripcion": objetivo})
         flujo["pasos"].append({"agente": "Arquitecto", "resultado": r_arq})
 
-        # 3. Developer propone codigo para la primera subtarea suya
         subtarea_dev = next(
             (s for s in subtareas if s.get("agente_sugerido") == "Developer"),
             {"descripcion": objetivo},
@@ -71,19 +78,15 @@ class AgentRunner:
         r_dev = self.ejecutar_agente("Developer", {"descripcion": subtarea_dev["descripcion"]})
         flujo["pasos"].append({"agente": "Developer", "resultado": r_dev})
 
-        # 4. FIX: Quantum_RD recibe el OBJETIVO GLOBAL (no la subtarea puntual)
-        #    Asi detecta "simular"/"empresa" y elige el algoritmo especifico.
         r_q = self.ejecutar_agente("Quantum_RD", {"descripcion": objetivo})
         flujo["pasos"].append({"agente": "Quantum_RD", "resultado": r_q})
 
-        # 5. FIX: Tester en modo flujo (evita recursion de pytest)
         r_test = self.ejecutar_agente("Tester", {
             "descripcion": objetivo,
             "modo_flujo": True,
         })
         flujo["pasos"].append({"agente": "Tester", "resultado": r_test})
 
-        # 6. Auditor valida GOVERNANCE
         r_aud = self.ejecutar_agente("Auditor", {"descripcion": objetivo})
         flujo["pasos"].append({"agente": "Auditor", "resultado": r_aud})
 
@@ -94,7 +97,6 @@ class AgentRunner:
                                      violaciones=flujo["violaciones"])
             return flujo
 
-        # 7. Business analiza viabilidad
         r_biz = self.ejecutar_agente("Business", {"descripcion": objetivo})
         flujo["pasos"].append({"agente": "Business", "resultado": r_biz})
 
