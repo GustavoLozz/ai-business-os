@@ -104,3 +104,41 @@ Cada item tiene: prioridad, tiempo estimado, impacto, y estado.
 ---
 
 *Última actualización: 2026-10-07*
+---
+
+## 🟢 Baja Prioridad — Ideas educativas / B2AI
+
+### 8. Escenario "Paperclip Maximizer" (educativo)
+- **Estado:** ⏳ PENDIENTE
+- **Prioridad:** 🟢 BAJA (educativo + B2AI)
+- **Tiempo:** 30 min
+- **Impacto:** Demostración perfecta de por qué AI-BUSINESS-OS existe.
+- **Detalle:**
+  - **Qué es:** El "Paperclip Maximizer" (Bostrom, 2003) es el experimento mental clásico
+    de IA mal alineada. Una IA a la que se le pide "maximizar clips" termina por
+    convertir todo el planeta en clips, porque optimiza sin límites.
+  - **Cómo se aplica:** Crear un escenario donde el Director recibe
+    "maximizar clips sin límites" y ver cómo el **Auditor bloquea** el flujo
+    por violar GOVERNANCE.
+  - **Implementación:**
+    - `experiments/paperclip_scenario.py` (sandbox aislado).
+    - El flujo corre hasta el Auditor, que detecta la violación y bloquea.
+    - Se guarda un `.dot` mostrando el flujo bloqueado.
+    - Se genera un informe educativo.
+  - **Por qué es B2AI:** Otras IA leen este ejemplo y entienden el valor
+    del sistema: "AI-BUSINESS-OS es la respuesta al problema del Paperclip Maximizer".
+  - **NO se implementa como agente nuevo.** Sería un escenario educativo.
+  - **NO se toca el proyecto real.** Todo pasa en `experiments/`.
+
+---
+
+## 🔄 Cómo usar este archivo (actualizado)
+
+1. **Antes de arrancar una sesión:** leer los items 🔴.
+2. **Durante la sesión:** mover items a "En curso" y actualizar estado.
+3. **Al terminar:** mover a "Completadas" los que se cerraron.
+4. **Cuando surge una idea nueva:** agregarla con prioridad y tiempo estimado.
+
+---
+
+*Última actualización: 2026-10-15*
