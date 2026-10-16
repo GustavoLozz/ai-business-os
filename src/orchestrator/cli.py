@@ -53,12 +53,10 @@ def _imprimir_simulacion(flujo):
     print(f"  Estado: {flujo.get('estado', '?')}")
     print(f"  Agentes ejecutados: {len(flujo.get('pasos', []))}")
     print("-" * 60)
-
     sim = flujo.get("simulacion", {})
     if "error" in sim:
         print(f"  ERROR en simulacion: {sim['error']}")
         return
-
     params = flujo.get("parametros", {})
     print(f"  Parametros: {params.get('dias', '?')} dias, "
           f"{params.get('clientes', '?')} clientes, "
@@ -85,6 +83,20 @@ def _imprimir_informe(informe):
           f"Tareas: {sis['tareas_totales']} | "
           f"Memorias: {sis['memorias_guardadas']}")
     print("-" * 60)
+
+    # Cerebro
+    c = informe.get("cerebro", {})
+    if c:
+        print("  CEREBRO LLM:")
+        print(f"    Nombre:      {c.get('nombre', '?')}")
+        print(f"    Modelo:      {c.get('modelo', '?')}")
+        print(f"    Disponible:  {'SI' if c.get('disponible') else 'NO'}")
+        print(f"    Llamadas:    {c.get('llamadas', 0)}")
+        print(f"    Tokens:      {c.get('tokens_entrada', 0)} in / {c.get('tokens_salida', 0)} out")
+        print(f"    Costo:       ${c.get('costo_estimado_usd', 0):.6f} USD")
+        print("-" * 60)
+
+    # Simulacion
     sim = informe["ultima_simulacion"]
     if sim["disponible"]:
         print(f"  Ultima simulacion: {sim['descripcion'][:50]}")
@@ -93,6 +105,8 @@ def _imprimir_informe(informe):
     else:
         print(f"  {sim['mensaje']}")
     print("-" * 60)
+
+    # Recomendaciones
     print("  RECOMENDACIONES:")
     for r in informe["recomendaciones"]:
         print(f"    - {r}")
@@ -109,8 +123,7 @@ def main():
     parser.add_argument("--panel", action="store_true")
     parser.add_argument("--dashboard", action="store_true")
     parser.add_argument("--reporte", action="store_true")
-    parser.add_argument("--informe-ejecutivo", action="store_true",
-                        help="Genera el informe ejecutivo del CEO")
+    parser.add_argument("--informe-ejecutivo", action="store_true")
     parser.add_argument("--listar-agentes", action="store_true")
     parser.add_argument("--flujo", type=str)
     parser.add_argument("--simular-empresa", action="store_true")
@@ -119,6 +132,10 @@ def main():
     parser.add_argument("--diagrama", action="store_true")
     parser.add_argument("--diagrama-sistema", action="store_true")
     parser.add_argument("--config", action="store_true")
+    parser.add_argument("--cerebro-info", action="store_true",
+                        help="Muestra info del cerebro LLM actual")
+    parser.add_argument("--sin-cerebro", action="store_true",
+                        help="Fuerza modo simbolico (NullBrain) sin llamar al LLM")
     parser.add_argument("--aprobar", type=str)
     parser.add_argument("--rechazar", type=str)
 
@@ -126,7 +143,17 @@ def main():
 
     sys.path.insert(0, str(ROOT))
     from src.orchestrator.core import Orchestrator
-    orch = Orchestrator()
+
+    if args.sin_cerebro:
+        from src.orchestrator.brains import NullBrain
+        orch = Orchestrator(brain=NullBrain())
+    else:
+        orch = Orchestrator()
+
+    if args.cerebro_info:
+        info = orch.brain.info()
+        print(json.dumps(info, indent=2, ensure_ascii=False))
+        return
 
     if args.config:
         from src.orchestrator.config import Config
@@ -175,12 +202,8 @@ def main():
         return
 
     if args.simular_empresa:
-        flujo = orch.simular_empresa(
-            dias=args.dias,
-            clientes=args.clientes,
-        )
+        flujo = orch.simular_empresa(dias=args.dias, clientes=args.clientes)
         _imprimir_simulacion(flujo)
-
         if args.diagrama:
             from src.orchestrator.dot_exporter import DotExporter
             exp = DotExporter()
@@ -191,7 +214,6 @@ def main():
     if args.flujo:
         flujo = orch.ejecutar_flujo(args.flujo)
         _imprimir_flujo(flujo)
-
         if args.diagrama:
             from src.orchestrator.dot_exporter import DotExporter
             exp = DotExporter()
