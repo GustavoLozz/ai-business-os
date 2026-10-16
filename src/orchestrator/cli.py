@@ -17,33 +17,35 @@ def _imprimir_flujo(flujo):
     for paso in flujo.get("pasos", []):
         agente = paso.get("agente", "?")
         r = paso.get("resultado", {})
-        print(f"  [{agente}]")
-        if "subtareas" in r:
-            print(f"    -> {len(r['subtareas'])} subtareas generadas")
-        elif "arquitectura" in r:
-            comp = r["arquitectura"].get("componentes", [])
-            print(f"    -> {len(comp)} componentes propuestos")
-        elif "propuesta" in r:
-            archivos = r["propuesta"].get("archivos", [])
-            print(f"    -> {len(archivos)} archivos propuestos (sandbox)")
-        elif "experimento" in r:
-            algo = r["experimento"].get("algoritmo", "")
-            print(f"    -> experimento: {algo[:40]}")
-        elif "resultado" in r and "passed" in r["resultado"]:
-            print(f"    -> tests: {r['resultado']['passed']} passed, {r['resultado']['failed']} failed")
-        elif "aprobado" in r:
-            print(f"    -> auditoria: {r['veredicto']}")
-            if r.get("violaciones"):
-                for v in r["violaciones"]:
+        print(f"  [{agente}] estado={r.get('estado', '?')}")
+        contenido = r.get("resultado", {}) if isinstance(r, dict) else {}
+        if "subtareas" in contenido:
+            print(f"    -> {len(contenido['subtareas'])} subtareas")
+        elif "arquitectura" in contenido:
+            comp = contenido["arquitectura"].get("componentes", [])
+            print(f"    -> {len(comp)} componentes")
+        elif "propuesta" in contenido:
+            archivos = contenido["propuesta"].get("archivos", [])
+            print(f"    -> {len(archivos)} archivos en sandbox")
+        elif "experimento" in contenido:
+            algo = contenido["experimento"].get("algoritmo", "")[:40]
+            print(f"    -> experimento: {algo}")
+        elif "resultado" in contenido and "passed" in contenido["resultado"]:
+            rc = contenido["resultado"]
+            print(f"    -> tests: {rc['passed']} passed, {rc['failed']} failed")
+        elif "aprobado" in contenido:
+            print(f"    -> auditoria: {contenido['veredicto']}")
+            if contenido.get("violaciones"):
+                for v in contenido["violaciones"]:
                     print(f"       ! {v}")
-        elif "analisis" in r:
-            print(f"    -> viabilidad: {r['analisis'].get('viabilidad', '?')}")
+        elif "analisis" in contenido:
+            print(f"    -> viabilidad: {contenido['analisis'].get('viabilidad', '?')}")
+        if r.get("razon"):
+            print(f"    ! {r['razon']}")
+        if r.get("violaciones"):
+            for v in r["violaciones"]:
+                print(f"       ! {v}")
         print()
-    if flujo.get("violaciones"):
-        print("  VIOLACIONES DETECTADAS:")
-        for v in flujo["violaciones"]:
-            print(f"    - {v}")
-    print("=" * 60)
 
 
 def _imprimir_simulacion(flujo):
@@ -83,8 +85,6 @@ def _imprimir_informe(informe):
           f"Tareas: {sis['tareas_totales']} | "
           f"Memorias: {sis['memorias_guardadas']}")
     print("-" * 60)
-
-    # Cerebro
     c = informe.get("cerebro", {})
     if c:
         print("  CEREBRO LLM:")
@@ -92,11 +92,8 @@ def _imprimir_informe(informe):
         print(f"    Modelo:      {c.get('modelo', '?')}")
         print(f"    Disponible:  {'SI' if c.get('disponible') else 'NO'}")
         print(f"    Llamadas:    {c.get('llamadas', 0)}")
-        print(f"    Tokens:      {c.get('tokens_entrada', 0)} in / {c.get('tokens_salida', 0)} out")
         print(f"    Costo:       ${c.get('costo_estimado_usd', 0):.6f} USD")
         print("-" * 60)
-
-    # Simulacion
     sim = informe["ultima_simulacion"]
     if sim["disponible"]:
         print(f"  Ultima simulacion: {sim['descripcion'][:50]}")
@@ -105,13 +102,9 @@ def _imprimir_informe(informe):
     else:
         print(f"  {sim['mensaje']}")
     print("-" * 60)
-
-    # Recomendaciones
     print("  RECOMENDACIONES:")
     for r in informe["recomendaciones"]:
         print(f"    - {r}")
-    print("=" * 60)
-    print(f"  Guardado en: reports/{informe['fecha']}/informe-ejecutivo.md")
     print("=" * 60)
 
 
@@ -132,12 +125,18 @@ def main():
     parser.add_argument("--diagrama", action="store_true")
     parser.add_argument("--diagrama-sistema", action="store_true")
     parser.add_argument("--config", action="store_true")
-    parser.add_argument("--cerebro-info", action="store_true",
-                        help="Muestra info del cerebro LLM actual")
-    parser.add_argument("--sin-cerebro", action="store_true",
-                        help="Fuerza modo simbolico (NullBrain) sin llamar al LLM")
-    parser.add_argument("--aprobar", type=str)
-    parser.add_argument("--rechazar", type=str)
+    parser.add_argument("--cerebro-info", action="store_true")
+    parser.add_argument("--sin-cerebro", action="store_true")
+
+    # Aprobaciones (los flags de Claude)
+    parser.add_argument("--pendientes", action="store_true",
+                        help="Lista aprobaciones pendientes")
+    parser.add_argument("--aprobar", type=str, metavar="TASK_ID",
+                        help="Aprueba una tarea pendiente")
+    parser.add_argument("--rechazar", type=str, metavar="TASK_ID",
+                        help="Rechaza una tarea pendiente")
+    parser.add_argument("--reanudar", type=str, metavar="TASK_ID",
+                        help="Reanuda un flujo ya aprobado")
 
     args = parser.parse_args()
 
@@ -150,6 +149,36 @@ def main():
     else:
         orch = Orchestrator()
 
+    # === Aprobaciones (prioridad alta) ===
+    if args.pendientes:
+        pendientes = orch.approvals.listar_pendientes()
+        if not pendientes:
+            print("No hay aprobaciones pendientes.")
+            return
+        print(f"Aprobaciones pendientes ({len(pendientes)}):\n")
+        for s in pendientes:
+            print(f"  ID: {s['task_id']}")
+            print(f"  Motivo: {s['motivo']}")
+            print(f"  Fecha: {s['fecha']}")
+            print("-" * 50)
+        return
+
+    if args.aprobar:
+        ok = orch.approvals.aprobar(args.aprobar)
+        print(f"Tarea {args.aprobar} {'APROBADA' if ok else 'no encontrada o ya resuelta'}")
+        return
+
+    if args.rechazar:
+        ok = orch.approvals.rechazar(args.rechazar)
+        print(f"Tarea {args.rechazar} {'RECHAZADA' if ok else 'no encontrada o ya resuelta'}")
+        return
+
+    if args.reanudar:
+        flujo = orch.runner.reanudar_flujo(args.reanudar)
+        _imprimir_flujo(flujo)
+        return
+
+    # === Comandos normales ===
     if args.cerebro_info:
         info = orch.brain.info()
         print(json.dumps(info, indent=2, ensure_ascii=False))
