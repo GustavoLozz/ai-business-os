@@ -1,0 +1,48 @@
+{
+  "fecha": "2026-10-16",
+  "total": 7,
+  "agentes": [
+    {
+      "nombre": "Director",
+      "rol": "Planifica y prioriza objetivos",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274084"
+    },
+    {
+      "nombre": "Arquitecto",
+      "rol": "Disena estructura y arquitectura",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274118"
+    },
+    {
+      "nombre": "Developer",
+      "rol": "Escribe y modifica codigo",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274132"
+    },
+    {
+      "nombre": "Quantum_RD",
+      "rol": "Experimenta con quantum-inspired",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274146"
+    },
+    {
+      "nombre": "Tester",
+      "rol": "Crea y corre tests",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274159"
+    },
+    {
+      "nombre": "Auditor",
+      "rol": "Revisa, audita y bloquea si es necesario",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274172"
+    },
+    {
+      "nombre": "Business",
+      "rol": "Simula y analiza negocios",
+      "estado": "registrado",
+      "registrado_en": "2026-10-16T08:53:24.274187"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "fecha": "2026-10-16",
+  "total_errores": 1915,
+  "total_warnings": 1605,
+  "entradas": [
+    {
+      "timestamp": "2026-10-07T09:13:18.320006",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:18.323364",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:20.999129",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:21.016090",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:23.860008",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:23.873611",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:27.940976",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:28.523685",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:32.017772",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:32.029416",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:42.742509",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:42.756268",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:42.862372",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:42.875618",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:44.365822",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:44.515592",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:54.303134",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:54.316529",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:54.882869",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:54.896583",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:57.564983",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:13:57.670253",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:14:10.475447",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:14:10.499540",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:14:21.542949",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:14:21.984458",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:38.577161",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:38.922407",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:50.513885",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:50.527103",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:59.556690",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T09:15:59.574549",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T10:01:41.062311",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T10:01:41.075559",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T10:04:31.053619",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T10:04:31.067837",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T11:06:27.240426",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T11:06:27.254672",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T16:18:15.621180",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T16:18:15.634804",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T16:41:45.401390",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T16:41:45.414850",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-07T17:59:57.828286",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-07T17:59:57.845239",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-15T22:07:01.690514",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-15T22:07:01.704169",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-15T22:29:26.225131",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-15T22:29:26.239150",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    },
+    {
+      "timestamp": "2026-10-16T08:53:03.834189",
+      "nivel": "ERROR",
+      "mensaje": "agente_no_encontrado",
+      "agente": "NoExiste"
+    },
+    {
+      "timestamp": "2026-10-16T08:53:03.850852",
+      "nivel": "WARNING",
+      "mensaje": "permiso_denegado",
+      "agente": "Developer",
+      "accion": "tocar_main",
+      "razon": "Developer NO puede tocar_main"
+    }
+  ]
+}
