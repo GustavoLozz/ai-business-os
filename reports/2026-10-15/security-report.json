@@ -1,0 +1,12 @@
+{
+  "fecha": "2026-10-15",
+  "reglas_activas": [
+    "Ningun agente modifica main directamente",
+    "Maximo 3 intentos por tarea",
+    "Cambios criticos requieren aprobacion",
+    "Prohibido borrar sin permiso",
+    "Prohibido operar cuentas reales"
+  ],
+  "alertas": [],
+  "estado": "OK"
+}

@@ -1,0 +1,91 @@
+{
+  "fecha": "2026-10-15",
+  "timestamp": "2026-10-15T22:29:28.076800",
+  "sistema": {
+    "agentes_registrados": 7,
+    "tareas_totales": 0,
+    "memorias_guardadas": 17,
+    "pendientes_aprobacion": 0,
+    "estado_general": "OK"
+  },
+  "agentes": [
+    {
+      "nombre": "Director",
+      "rol": "Planifica y prioriza objetivos",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Arquitecto",
+      "rol": "Disena estructura y arquitectura",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Developer",
+      "rol": "Escribe y modifica codigo",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Quantum_RD",
+      "rol": "Experimenta con quantum-inspired",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Tester",
+      "rol": "Crea y corre tests",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Auditor",
+      "rol": "Revisa, audita y bloquea si es necesario",
+      "estado": "registrado",
+      "icono": "[--]"
+    },
+    {
+      "nombre": "Business",
+      "rol": "Simula y analiza negocios",
+      "estado": "registrado",
+      "icono": "[--]"
+    }
+  ],
+  "ultima_simulacion": {
+    "disponible": false,
+    "mensaje": "Aun no se ejecuto ninguna simulacion completa.",
+    "descripcion": "",
+    "facturacion": 0,
+    "margen": 0,
+    "margen_pct": 0,
+    "fecha": "?"
+  },
+  "recomendaciones": [
+    "Correr una simulacion completa para obtener recomendaciones especificas.",
+    "Revisar MEJORAS_PENDIENTES.md para el backlog.",
+    "Considerar Etapa 7 (conectores reales) cuando este listo."
+  ],
+  "proximos_pasos": [
+    {
+      "etapa": 6,
+      "nombre": "Informe ejecutivo + OpenAPI",
+      "estado": "en_curso"
+    },
+    {
+      "etapa": 7,
+      "nombre": "Conectores reales (requiere aprobacion)",
+      "estado": "pendiente"
+    },
+    {
+      "etapa": 8,
+      "nombre": "Publicacion B2AI (GitHub + HuggingFace)",
+      "estado": "pendiente"
+    },
+    {
+      "etapa": 9,
+      "nombre": "Cerebros LLM (Ollama/OpenAI)",
+      "estado": "pendiente"
+    }
+  ]
+}
