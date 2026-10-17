@@ -1,7 +1,7 @@
 # AI-BUSINESS-OS - Informe Ejecutivo
 
 **Fecha:** 2026-10-16
-**Generado:** 2026-10-16T10:39:12.535915
+**Generado:** 2026-10-16T20:37:22.372887
 
 ---
 
@@ -11,7 +11,7 @@
 |---------|-------|
 | Agentes registrados | 7 |
 | Tareas totales | 0 |
-| Memorias guardadas | 28 |
+| Memorias guardadas | 39 |
 | Pendientes aprobacion | 0 |
 | Estado general | OK |
 
@@ -50,13 +50,13 @@
 ## 4. Ultima Simulacion
 
 **Descripcion:** Simular empresa virtual 5 dias con 20 clientes
-**Fecha:** 2026-10-16T10:23:05.652098
+**Fecha:** 2026-10-16T19:23:08.691307
 
 | Metrica | Valor |
 |---------|-------|
-| Facturacion | $67,931 |
-| Margen | $-184,569 |
-| Margen % | -271.7% |
+| Facturacion | $42,601 |
+| Margen | $-209,899 |
+| Margen % | -492.7% |
 
 ---
 

@@ -1,10 +1,10 @@
 {
   "fecha": "2026-10-16",
-  "timestamp": "2026-10-16T10:39:12.535915",
+  "timestamp": "2026-10-16T20:37:22.372887",
   "sistema": {
     "agentes_registrados": 7,
     "tareas_totales": 0,
-    "memorias_guardadas": 28,
+    "memorias_guardadas": 39,
     "pendientes_aprobacion": 0,
     "estado_general": "OK"
   },
@@ -66,10 +66,10 @@
   "ultima_simulacion": {
     "disponible": true,
     "descripcion": "Simular empresa virtual 5 dias con 20 clientes",
-    "facturacion": 67931.0,
-    "margen": -184569.0,
-    "margen_pct": -271.7,
-    "fecha": "2026-10-16T10:23:05.652098"
+    "facturacion": 42601.0,
+    "margen": -209899.0,
+    "margen_pct": -492.71,
+    "fecha": "2026-10-16T19:23:08.691307"
   },
   "recomendaciones": [
     "Margen negativo. La empresa pierde dinero. Revisar urgente.",
