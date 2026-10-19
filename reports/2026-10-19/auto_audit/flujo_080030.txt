@@ -1,0 +1,16 @@
+﻿============================================================
+  FLUJO: Auditar el estado del proyecto
+============================================================
+  Estado: esperando_aprobacion
+  Pasos ejecutados: 3
+------------------------------------------------------------
+  [Director] estado=completado
+    -> 5 subtareas
+
+  [Arquitecto] estado=completado
+    -> 5 componentes
+
+  [Developer] estado=esperando_aprobacion
+    -> 1 archivos en sandbox
+
+

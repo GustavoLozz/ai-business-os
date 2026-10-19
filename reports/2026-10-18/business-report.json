@@ -1,0 +1,12 @@
+{
+  "fecha": "2026-10-18",
+  "estado": "etapa2_en_construccion",
+  "empresa_simulada": {
+    "facturacion": 0,
+    "costos": 0,
+    "margen_pct": 0,
+    "clientes": 0,
+    "oportunidades": 0
+  },
+  "nota": "La empresa simulada se construye en Etapa 4"
+}

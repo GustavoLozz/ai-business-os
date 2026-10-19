@@ -1,1 +1,92 @@
-﻿[]
+[
+  {
+    "task_id": "Developer_20261018_134709_348477",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Implementar modelo de clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingreso_mensu"
+    },
+    "fecha": "2026-10-18T13:47:09.355060",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134709_825294",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Implementar modelo de clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingreso_mensu"
+    },
+    "fecha": "2026-10-18T13:47:09.827960",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134711_791878",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:11.796619",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134712_341309",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:12.343766",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134713_087579",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:13.089911",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134713_798141",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:13.800586",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134714_256824",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:14.259345",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261018_134715_110353",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Modelo de empresa virtual con clientes y productos', 'propuesta': {'archivos': [{'nombre': 'clientes.py', 'contenido': \"class Cliente:\\n    def __init__(self, id, nombre, ingreso_mensual):\\n        self.id = id\\n        self.nombre = nombre\\n        self.ingre"
+    },
+    "fecha": "2026-10-18T13:47:15.112901",
+    "estado": "pendiente"
+  },
+  {
+    "task_id": "Developer_20261019_080055_214881",
+    "motivo": "Developer requiere aprobacion",
+    "detalle": {
+      "agente": "Developer",
+      "resultado_resumen": "{'agente': 'Developer', 'descripcion': 'Auditar el estado del proyecto', 'propuesta': {'archivos': [{'nombre': 'auditor.py', 'contenido': '#!/usr/bin/env python3\\n\"\"\"Esqueleto para auditar el estado de un proyecto Python.\"\"\"\\n\\nimport os\\nimport subprocess\\nimport sys\\nfrom typing import Dict, List,"
+    },
+    "fecha": "2026-10-19T08:01:09.213748",
+    "estado": "pendiente"
+  }
+]

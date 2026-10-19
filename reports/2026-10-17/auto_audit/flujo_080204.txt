@@ -1,0 +1,18 @@
+﻿============================================================
+  FLUJO: Auditar el estado del proyecto
+============================================================
+  Estado: bloqueado
+  Pasos ejecutados: 3
+------------------------------------------------------------
+  [Director] estado=completado
+    -> 5 subtareas
+
+  [Arquitecto] estado=completado
+    -> 7 componentes
+
+  [Developer] estado=bloqueado
+    -> 1 archivos en sandbox
+    ! Auditoria fallida
+       ! Codigo contiene patron peligroso: 'subprocess.run' en audit.py
+
+
